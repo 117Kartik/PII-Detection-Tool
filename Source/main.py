@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import sys
 from docx import Document
 
 from detector import Detector
@@ -16,14 +16,34 @@ OUTPUT_DIR = BASE_DIR / "OP"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 OUTPUT_FILE = OUTPUT_DIR / "Red_Herring_Prospectus_Redacted.docx"
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+INPUT_FILE = BASE_DIR / "IP" / "Red Herring Prospectus.docx"
+
+OUTPUT_DIR = BASE_DIR / "OP"
+OUTPUT_DIR.mkdir(exist_ok=True)
+
+OUTPUT_FILE = OUTPUT_DIR / "Red_Herring_Prospectus_Redacted.docx"
+
+try:
+    if OUTPUT_FILE.exists():
+        OUTPUT_FILE.unlink()
+except PermissionError:
+    print("Please close the redacted document and run the program again.")
+    sys.exit(1)
 
 
-# Debug Configuration
 DEBUG = True
 LIMIT = 50
 
 
-# Load Document
+# Debug
+DEBUG = True
+LIMIT = 50
+
+print(INPUT_FILE)
+print(OUTPUT_FILE)
+# Load
 doc = Document(str(INPUT_FILE))
 
 # Initialize Components
@@ -37,7 +57,6 @@ for paragraph in traverse_document(doc):
 
     count += 1
 
-    # Process only a few paragraphs while debugging
     if DEBUG and count > LIMIT:
         break
 
