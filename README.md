@@ -54,21 +54,6 @@ spaCy NER is used to detect contextual entities such as:
 - Date of Birth
 
 
-#Structure
-    PII-Redaction-Tool/
-    │
-    ├── IP/          # Original documents
-    ├── OP/         # Redacted documents
-    ├── Source/
-    │   ├── main.py
-    │   ├── detect.py
-    │   ├── replace.py
-    │   └── evaluate.py
-    ├── README.md
-    ├── requirements.txt
-    └── .gitignore
-
-
 #Limitations
 Although the hybrid approach performs well on many documents, Named Entity Recognition models may occasionally produce false positives or miss certain entities, especially in highly structured documents such as financial prospectuses.
 
